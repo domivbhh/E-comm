@@ -1,26 +1,50 @@
 import React, { useState } from 'react'
 import loginSignupImage from "../assest/login-animation.gif";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch } from 'react-redux';
+import {loginUser} from '../store/slice.js'
+
 
 
 
 const Signin = () => {
-const [data, setData] = useState({
+  const dispatch=useDispatch()
+  const [data, setData] = useState({
   email: "",
   password: "",
 });
 
+const navigate=useNavigate()
 
     const handleChange = (e) => {
       setData({ ...data, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
-      const {  email,password,  } = data;
+      const {  email,password  } = data;
       if (email.trim()!=='' || password.trim()!=='') {
-        alert('login success')
-      } 
+        const result = await fetch("http://localhost:4000/auth/signin", 
+          {
+          method:'POST',
+           headers:{
+                  "content-type":"application/json",
+                },
+           body:JSON.stringify({email,password})
+              }
+        );
+        const resp = await result.json();
+        
+        if(resp.status==='success'){
+        dispatch(loginUser(resp.data))
+          toast.success(`Welcome ${resp.data.firstname}`);   
+        navigate('/')      
+        }
+        else{
+          toast('Invalid credentials')
+        }
+      }
       else {
         alert("please fill all the fields");
       }

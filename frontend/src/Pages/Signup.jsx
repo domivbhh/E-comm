@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import loginSignupImage from '../assest/login-animation.gif'
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import ImagetoBase64 from '../utils/imgtobase64.js';
 
 const Signup = () => {
@@ -29,7 +30,7 @@ const Signup = () => {
         const{firstname,email,lastname,password,confirmpassword}=data
         if(firstname && email && password && confirmpassword ){
             if(password===confirmpassword){
-              const fetchData = await fetch("http://localhost:4000/signup",{
+              const fetchData = await fetch("http://localhost:4000/auth/signup",{
                 method:'POST',
                 headers:{
                   "content-type":"application/json",
@@ -37,7 +38,13 @@ const Signup = () => {
                 body:JSON.stringify(data)
               });
               const resp=await fetchData.json()
-              console.log(resp)
+              if(resp.message.code===11000){
+                toast('Email id already exists')
+              }
+              else{
+                  toast(resp.message);
+                  navigate('/login')
+              }
             }
             else{
                 alert('check the details again')

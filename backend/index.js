@@ -4,24 +4,20 @@ const mongoose=require('mongoose')
 const dotenv=require('dotenv')
 const app=express()
 dotenv.config()
+const userRouter=require('./routes/userRoutes.js')
 
 app.use(cors())
 app.use(express.json({limit:'10mb'}))
 
-
-
-
-app.get('/',(req,res)=>{
-res.json({message:'hello world'})
+mongoose.set('strictQuery',false)
+mongoose.connect(process.env.MONGO_URI).then(()=>{ 
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running at ${process.env.PORT} and db connected success`);
+});
 })
-
-app.post('/signup',(req,res)=>{
-    res.send(req.body)
-    // console.log(req.body)
-
+.catch((e)=>{
+    console.log(e)
 })
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Server is running at ${process.env.PORT}`)
-})
+app.use('/auth',userRouter)
