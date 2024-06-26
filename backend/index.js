@@ -5,6 +5,7 @@ const dotenv=require('dotenv')
 const app=express()
 dotenv.config()
 const userRouter=require('./routes/userRoutes.js')
+const productRouter=require('./routes/productRoutes.js')
 
 app.use(cors())
 app.use(express.json({limit:'10mb'}))
@@ -19,5 +20,5 @@ app.listen(process.env.PORT, () => {
     console.log(e)
 })
 
-
+app.use('/product',productRouter)
 app.use('/auth',userRouter)

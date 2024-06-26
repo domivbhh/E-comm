@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 
 const About = () => {
-  console.log(users)
+  // console.log(users)
 
   return (
     <div>

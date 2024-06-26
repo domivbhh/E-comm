@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
@@ -8,19 +8,27 @@ import About from './Pages/About.jsx'
 import Contact from './Pages/Contact.jsx'
 import Menu from './Pages/Menu.jsx'
 import Login from './Pages/Login.jsx'
-import Product from './Pages/Product.jsx'
+// import Product from './Pages/Product.jsx'
 import Signin from './Pages/Signin.jsx'
 import Signup from './Pages/Signup.jsx'
 import {Provider} from 'react-redux'
 import store from './store/store.js'
 import Home from './Pages/Home.jsx'
+import NewProducts from './Pages/NewProducts.jsx'
+import Cart from './Pages/Cart.jsx'
+
+const Product = lazy(()=>import("./Pages/Product.jsx"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App/>,
     errorElement: <Error />,
     children: [
+      {
+        index:true,
+        element:<Home/>
+      },
       
       {
         path: "/about",
@@ -48,13 +56,20 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
+        path: "/cart",
+        element: <Cart/>,
+        errorElement: <Error />,
+      },
+      {
         path: "/products",
-        element: <Product/>,
+        element: <Suspense fallback={<h1>Loading...</h1>}>
+          <Product/>
+        </Suspense>,
         errorElement: <Error />,
       },
       {
         path:'/new-product',
-        element:<Home/>,
+        element:<NewProducts/>,
         errorElement:<Error/>
       }
     ],

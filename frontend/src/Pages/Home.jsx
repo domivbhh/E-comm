@@ -1,105 +1,154 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState,useCallback } from 'react'
 import { IoCloudUploadOutline } from "react-icons/io5";
 import ImagetoBase64 from "../utils/imgtobase64.js";
+import toast from "react-hot-toast";
+// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { setProduct } from "../store/productSlice.jsx";
+import HomeCard from './HomeCard.jsx';
+import CardFeature from './CardFeature.jsx';
+import Shimmer from '../components/Shimmer.jsx';
+import FilterProd from '../components/FilterProd.jsx';
+import DisplayProd from '../components/DisplayProd.jsx';
+import { Link } from 'react-router-dom';
+
 
 
 
 const Home = () => {
-  const[data,setData]=useState({
-    name:'',
-    category:'',
-    image:'',
-    price:'',
-    description:''
+  // const [homecard,setHomecard]=useState([])
+  // const [datas,setDatas]=useState([])
+  const dispatch = useDispatch();
+  const[display,setDisplay]=useState([])
+  // console.log(display)
+  const product = useSelector((state) => state.product);
+  // console.log(product.product)
+  const vegetableProduct=product.product.filter((ele)=>ele.category==='vegetable')
+  // setHomecard(product.product.slice(0,5))
+  const fruitProduct = product.product.filter(
+    (ele) => ele.category === "fruit"
+  );
+  // console.log(fruitProduct)
+
+  const loadingArray=Array.from({length:4},(_,ind)=>{
+    return ind
   })
 
-    const uploadImage=async(file)=>{
-            // console.log(file[0])
-            const imgs = await ImagetoBase64(file[0]);
-            setData({...data,image:imgs})
-            
-    }
-
-    const handleChange=(e)=>{
-      setData({...data,[e.target.name]:e.target.value})
-    }
-
-    const handleSubmit=(e)=>{
-      e.preventDefault()
-      console.log(data)
-    }
+  const memoized = useCallback(() => {
+    // console.log("fetching datas is calling");
+    fetchProducts();
+  }, []);
+  const fetchProducts = async () => {
+    const data = await fetch("http://localhost:4000/product/get");
+    const resp = await data.json();
+    console.log(resp);
+    dispatch(setProduct(resp));
+  };
 
 
+  useEffect(() => {
+    // console.log("memoized is calling");
+    memoized();
+  }, []);
+// setHomecard(homeCardData)
+
+
+const categoryList = [
+  ...new Set(product.product.map((ele) => ele.category)),
+];
+// console.log(categoryList)
+
+
+  // setHomecard([...homecard, product.product.slice(0,5)]);
   return (
-    <div className="p-4">
-      <form
-        action=""
-        className="m-auto w-full max-w-md my-2 shadow flex flex-col bg-white"
-        onSubmit={handleSubmit}
-      >
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          className="bg-slate-200 p-2 mx-1 my-1"
-          value={data.name}
-          onChange={(e) => handleChange(e)}
-        />
-        <label htmlFor="category">Category</label>
-        <select
-          name="category"
-          id="categ"
-          className="bg-slate-200 p-1 my-1 mx-1"
-          onChange={(e)=>handleChange(e)}
-        >
-          <option>Vegetable</option>
-          <option>Fruit</option>
-          <option>Juices</option>
-          <option>Dosa</option>
-          <option>Pizza</option>
-        </select>
-
-        <label htmlFor="image" className="cursor-pointer">
-          Image
-          <div className="h-40 w-full bg-slate-300 my-1 rounded-md flex items-center justify-center">
-            <span className="text-5xl">
-              {!data.image?<IoCloudUploadOutline />:''}
-            </span>
-            <img src={data.image} className='h-full' alt="" />
-            <input
-              type="file"
-              className="hidden"
-              accept="image/*"
-              onChange={(e) => uploadImage(e.target.files)}
-              id="image"
+    <div className="p-2 md:p-4">
+      <div className="md:flex gap-4 py-2">
+        <div className="md:w-1/2 py-4">
+          <div className="flex flex-row gap-3 w-1/4 items-center rounded-full h-10 bg-slate-400 px-2 ">
+            <p className="font-semibold text-white">
+              {" "}
+              Bike-Delivery
+            </p>
+            <img
+              src="https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-bicycle-icon-png-image_3985605.jpg"
+              alt=""
+              className="h-7 bg-slate-400"
             />
           </div>
-        </label>
-
-        <label htmlFor="price" className="my-1">
-          Price
-        </label>
-        <input
-          type="text"
-          name="price"
-          onChange={(e) => handleChange(e)}
-          className="bg-slate-200 p-1 my-1 mx-1"
-          id="price"
-        />
-
-        <label htmlFor="description">Description</label>
-        <textarea
-          rows={3}
-          className="bg-slate-200 p-1 my-1 resize-none mx-1"
-          name="description"
-          onChange={(e) => handleChange(e)}
-        ></textarea>
-
-        <button className="bg-slate-500 hover:bg-slate-700 text-white text-lg font-md drop-shadow-md mx-2 my-2 rounded-lg">
-          Submit
-        </button>
-      </form>
+          <h2 className="text-4xl font-bold md:text-7xl py-3 ">
+            The Fastest Delivery to{" "}
+            <span className="text-red-600">Your Home</span>
+          </h2>
+          <p className="text-base py-3 max-w-sm-lg">
+            Through A to Z Cart , we promptly locate the highest-rated bike
+            courier near your vicinity, ensuring speedy delivery and top-notch
+            service for the recipient.
+          </p>
+          <button className="text-bold bg-red-500 text-slate-200 px-3 py-2 rounded-md">
+            <Link to={'/products'}>All Products</Link>
+          </button>
+          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})} className="text-bold bg-red-500 mx-5 text-slate-200 px-3 py-2 rounded-md">
+            See specials
+          </button>
+        </div>
+        <div className="md:w-1/2 flex flex-wrap gap-5 p-4 justify-center">
+        
+          {product.product.length > 0
+            ? product.product?.slice(0, 5).map((ele) => {
+                return <HomeCard ele={ele} key={ele._id} />;
+              })
+            : loadingArray.map((ele,ind) => <Shimmer key={ind} />)}
+        </div>
+      </div>
+      {vegetableProduct.length > 0 ? (
+        <div className="">
+          <div className="flex w-full items-center">
+            <h2 className="font-bold text-2xl text-slate-800 my-4 text-center">
+              Fresh Vegetables
+            </h2>
+          </div>
+          <div className="flex gap-3 flex-wrap justify-center ">
+            {
+              vegetableProduct.map((ele) => {
+                return <CardFeature data={ele} key={ele._id+'vege'}/>;
+              })
+              // :(loadingArray.map((ele) => <Shimmer />))
+            }
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {fruitProduct.length > 0 ? (
+        <div className="">
+          <h2 className="font-bold text-2xl text-slate-800 my-4 ">
+            Fresh Fruits
+          </h2>
+          <div className="flex gap-3 flex-wrap justify-center">
+            {fruitProduct.map((ele) => {
+              return <CardFeature data={ele} key={ele._id+"fruit"} />;
+            })}
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      { product.product.length > 0?
+      <div className="my-5">
+        <h2 className="font-bold text-2xl text-slate-800 mb-4">Specials</h2>
+        <div className="flex gap-4 justify-center">
+          {categoryList.length > 0 &&
+            categoryList.map((ele,ind) => {
+              return (
+                <FilterProd datas={ele} setDisplay={setDisplay} key={ind}/>
+              );
+            })}
+        </div>
+        <div>
+          <DisplayProd data={display} />
+        </div>
+      </div>:''
+      }
     </div>
   );
 }
