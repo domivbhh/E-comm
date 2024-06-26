@@ -76,7 +76,7 @@ const Header = () => {
             <div className="text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden shadow-md drop-shadow-md ">
               {user?.image ? (
                 <img
-                  src={user.image}
+                  src={user?.image}
                   className="object-cover"
                   alt=""
                   profile
@@ -88,7 +88,7 @@ const Header = () => {
             </div>
             {show && (
               <div className="absolute right-2 bg-white py-2 px-2 shadow-md drop-shadow-md my-3 min-w-[120px] text-center">
-                {user.email === "admin123@gmail.com" ? (
+                {user?.email === "admin123@gmail.com" ? (
                   <Link to={"/new-product"}>
                     <p className="whitespace-nowrap right-0 text-xl cursor-pointer my-2">
                       Add Product

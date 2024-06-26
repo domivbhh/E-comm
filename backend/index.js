@@ -9,6 +9,7 @@ const productRouter=require('./routes/productRoutes.js')
 const path=require('path')
 
 app.use(cors())
+// let __dirname = path.resolve();
 app.use(express.json({limit:'10mb'}))
 
 mongoose.set('strictQuery',false)
@@ -21,7 +22,6 @@ app.listen(process.env.PORT, () => {
     console.log(e)
 })
 
-const __dirname=path.resolve()
 
 app.use('/product',productRouter)
 app.use('/auth',userRouter)
