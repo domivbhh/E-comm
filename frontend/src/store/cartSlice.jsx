@@ -27,6 +27,8 @@ const cartSlice=createSlice({
               
             }
             state.totalQty+=1
+                toast.success("item added");
+
             
         },
         deleteCart:(state,action)=>{

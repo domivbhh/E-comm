@@ -17,10 +17,14 @@ const Header = () => {
   const navigate=useNavigate()
   const[show,setShow]=useState(false)
   const dispatch=useDispatch()
-  const users = useSelector((state) => state.user);
+  // const users = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   // console.log(cart.cart);
   // console.log(users?.user?.email)
+
+  const datas = localStorage.getItem("user");
+  const user = JSON.parse(datas);
+  // console.log(user)
 
   
   // const statusCheck=useOnlineCheck()
@@ -29,6 +33,7 @@ const Header = () => {
 
   const handleLogout=()=>{
     dispatch(logoutUser());
+    localStorage.removeItem('user')
     toast.success('logout success')
     navigate('/login')
     
@@ -52,9 +57,9 @@ const Header = () => {
           <nav className=" gap-4 md:gap-6 text-base md:text-lg z-50 hidden md:flex">
             <Link to={"/"}>Home</Link>
             <Link to={"/products"}>Products</Link>
-            <Link to={"/about"}>About</Link>
+            {/* <Link to={"/about"}>About</Link> */}
             {/* <Link to={"/menu"}>Menu</Link> */}
-            <Link to={"/contact"}>Contact</Link>
+            {/* <Link to={"/contact"}>Contact</Link> */}
           </nav>
           <Link to={"/cart"}>
             <div className="text-2xl text-slate-600 cursor-pointer ">
@@ -69,20 +74,21 @@ const Header = () => {
             onClick={() => setShow(!show)}
           >
             <div className="text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden shadow-md drop-shadow-md ">
-              {users.user.image ? (
+              {user?.image ? (
                 <img
-                  src={users?.user?.image}
+                  src={user.image}
                   className="object-cover"
                   alt=""
                   profile
                 />
-              ) : (
+              ) : 
+              (
                 <FaUserAlt />
               )}
             </div>
             {show && (
               <div className="absolute right-2 bg-white py-2 px-2 shadow-md drop-shadow-md my-3 min-w-[120px] text-center">
-                {users.user.email === "admin123@gmail.com" ? (
+                {user.email === "admin123@gmail.com" ? (
                   <Link to={"/new-product"}>
                     <p className="whitespace-nowrap right-0 text-xl cursor-pointer my-2">
                       Add Product
@@ -92,12 +98,12 @@ const Header = () => {
                   ""
                 )}
 
-                {users?.user.firstname ? (
+                {user?.firstname ? (
                   <p
                     className="whitespace-nowrap right-0 font-sm cursor-pointer"
                     onClick={() => handleLogout()}
                   >
-                    Logout {users.user.firstname}
+                    Logout {user?.firstname}
                   </p>
                 ) : (
                   <Link to={"/login"}>
@@ -113,15 +119,14 @@ const Header = () => {
                   <Link to={"/products"} className="px-2 py-1 text-md">
                     Products
                   </Link>
-                  <Link to={"/about"} className="px-2 py-1 text-md">
+                  {/* <Link to={"/about"} className="px-2 py-1 text-md">
                     About
-                  </Link>
+                  </Link>*/}
                   {/* <Link to={"/menu"} className='px-2 py-1 text-md'>Menu</Link> */}
-                  <Link to={"/contact"} className="px-2 py-1 text-md">
+                  {/* <Link to={"/contact"} className="px-2 py-1 text-md">
                     Contact
-                  </Link>
+                  </Link>  */}
                 </nav>
-                
               </div>
             )}
           </div>

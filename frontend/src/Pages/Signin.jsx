@@ -38,6 +38,9 @@ const navigate=useNavigate()
         
         if(resp.status==='success'){
         dispatch(loginUser(resp.data))
+        localStorage.setItem('user',JSON.stringify(resp.data))
+        const datas=localStorage.getItem('user')
+        console.log(datas)
           toast.success(`Welcome ${resp.data.firstname}`);   
         navigate('/')      
         }

@@ -22,7 +22,7 @@ const Home = () => {
   const[display,setDisplay]=useState([])
   // console.log(display)
   const product = useSelector((state) => state.product);
-  console.log(product)
+  // console.log(product)
   const vegetableProduct=product.product.filter((ele)=>ele.category==='vegetable')
   // setHomecard(product.product.slice(0,5))
   const fruitProduct = product.product.filter(
@@ -41,7 +41,7 @@ const Home = () => {
   const fetchProducts = async () => {
     const data = await fetch("http://localhost:4000/product/get");
     const resp = await data.json();
-    console.log(resp);
+    // console.log(resp);
     dispatch(setProduct(resp));
   };
 
@@ -140,8 +140,8 @@ const categoryList = [
           {categoryList.length > 0 &&
             categoryList.map((ele,ind) => {
               return (
-                <div className='flex flex-wrap md:block'>
-                <FilterProd datas={ele} setDisplay={setDisplay} key={ind}/>
+                <div className='flex flex-wrap md:block' key={ele._id}>
+                <FilterProd datas={ele} setDisplay={setDisplay} />
                 </div>
               );
             })}

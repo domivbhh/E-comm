@@ -17,7 +17,7 @@ import Home from './Pages/Home.jsx'
 import NewProducts from './Pages/NewProducts.jsx'
 import Cart from './Pages/Cart.jsx'
 import { PersistGate } from 'redux-persist/integration/react';
-import persistStore from 'redux-persist/es/persistStore'
+// import { persistor } from './store/store.js'
 
 
 const Product = lazy(()=>import("./Pages/Product.jsx"));
@@ -84,7 +84,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 <Provider store={store}>
 
-  {/* <PersistGate persistor={persistor}> */}
+  {/* <PersistGate persistor={persistor} loading={null}> */}
   <RouterProvider router={router}>
     <App />
   </RouterProvider>

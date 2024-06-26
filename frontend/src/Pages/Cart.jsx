@@ -8,13 +8,15 @@ import { addToCart, deleteCart, removeCart } from '../store/cartSlice';
 
 
 const Cart = () => {
-  const user=useSelector((state)=>state.user)
+  // const user=useSelector((state)=>state.user)
   const dispatch=useDispatch()
     // console.log(user)
     const cart=useSelector((state)=>state.cart)
     // console.log(cart.cart,cart.total)
+    const datas = localStorage.getItem("user");
+    const user=JSON.parse(datas);
 
-    if(user?.user.firstname===undefined){
+    if(user?.firstname===undefined){
          return (
            <div className="w-1/2 h-1/5  text-2xl  text-center font-bold mx-auto">
              <img
