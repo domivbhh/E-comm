@@ -20,7 +20,7 @@ const DisplayProd = ({data}) => {
     <div className='flex flex-wrap justify-center my-5'>
         {
             datas.map((ele)=>{
-                return <div className='flex my-4 mx-2 '>
+                return <div className='flex my-4 mx-2 flex-wrap '>
                             <CardFeature data={ele}/>
                     </div>
             })

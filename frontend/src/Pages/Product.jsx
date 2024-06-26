@@ -25,13 +25,13 @@ const Product = () => {
 
 return (
   <div>
-    <div className="gap-y-4">
+    <div className="my-4">
       <h2 className="text-center w-1/2 mx-auto rounded-lg bg-slate-400 font-bold text-white text-2xl my-2">
         Vegetables
       </h2>
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-evenly flex-wrap">
         {vegetables.map((ele) => (
-          <CardFeature data={ele} />
+          <CardFeature data={ele} key={ele._id} />
         ))}
       </div>
     </div>
@@ -49,7 +49,7 @@ return (
       <h2 className="text-center font-bold  w-1/2 mx-auto rounded-lg bg-slate-400 text-white text-2xl my-2">
         Rice
       </h2>
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-4 justify-center flex-wrap">
         {rice.map((ele) => (
           <CardFeature data={ele} />
         ))}

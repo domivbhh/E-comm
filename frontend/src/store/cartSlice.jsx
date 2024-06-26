@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const cartSlice=createSlice({
     name:'cart',
     initialState:{
         cart:[],
-        total:0
+        total:0,
+        totalQty:0
     },
     reducers:{
         addToCart:(state,action)=>{
@@ -24,6 +26,7 @@ const cartSlice=createSlice({
               state.total+=action.payload.price
               
             }
+            state.totalQty+=1
             
         },
         deleteCart:(state,action)=>{
@@ -40,10 +43,17 @@ const cartSlice=createSlice({
             else{
                 state.cart[index].qty-=1
                
-            }
-             
+            }          
+            state.totalQty-=1
             
-        }
+        },
+         removeCart:(state,action)=>{
+                    console.log(action.payload)
+                state.totalQty -= state.cart[action.payload].qty;
+                state.total-=state.cart[action.payload].qty*state.cart[action.payload].price
+                state.cart.splice(action.payload,1)
+                toast.success('one item deleted')
+            }
          
             
 
@@ -53,5 +63,5 @@ const cartSlice=createSlice({
 
 
 
-export const{addToCart,deleteCart}=cartSlice.actions
+export const{addToCart,deleteCart,removeCart}=cartSlice.actions
 export default cartSlice.reducer

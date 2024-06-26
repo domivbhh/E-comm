@@ -14,6 +14,10 @@ const FilterProd = ({datas,setDisplay}) => {
 
 const handleClick = (e) => {
   setDisplay(e.target.innerHTML)
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:'smooth'
+  })
 };
 
 
@@ -22,16 +26,17 @@ const handleClick = (e) => {
 // console.log(filterProducts)
 
   return (
-    <div>
-
-    <div onClick={(e) => handleClick(e)}>
-      <div className="text-3xl p-5 rounded-full bg-yellow-500 hover:bg-violet-800 text-white cursor-text">
-        <CiForkAndKnife />
+      <div
+        onClick={(e) => handleClick(e)}
+        className="">
+        <div className="text-3xl p-5 rounded-full bg-yellow-500  hover:bg-violet-800 text-white cursor-text">
+          <CiForkAndKnife />
+        </div>
+        <p className="text-center font-medium capitalize cursor-pointer">
+          {datas}
+        </p>
       </div>
-      <p className="text-center font-medium capitalize cursor-pointer">{datas}</p>
-    </div>
     
-    </div>
   );
 }
 

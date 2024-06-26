@@ -22,7 +22,7 @@ const Home = () => {
   const[display,setDisplay]=useState([])
   // console.log(display)
   const product = useSelector((state) => state.product);
-  // console.log(product.product)
+  console.log(product)
   const vegetableProduct=product.product.filter((ele)=>ele.category==='vegetable')
   // setHomecard(product.product.slice(0,5))
   const fruitProduct = product.product.filter(
@@ -64,7 +64,7 @@ const categoryList = [
     <div className="p-2 md:p-4">
       <div className="md:flex gap-4 py-2">
         <div className="md:w-1/2 py-4">
-          <div className="flex flex-row gap-3 w-1/4 items-center rounded-full h-10 bg-slate-400 px-2 ">
+          <div className="md:flex flex-row gap-3 md:w-1/4 items-center rounded-full md:h-10 h-18 hidden bg-slate-400 px-2 ">
             <p className="font-semibold text-white">
               {" "}
               Bike-Delivery
@@ -87,7 +87,7 @@ const categoryList = [
           <button className="text-bold bg-red-500 text-slate-200 px-3 py-2 rounded-md">
             <Link to={'/products'}>All Products</Link>
           </button>
-          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})} className="text-bold bg-red-500 mx-5 text-slate-200 px-3 py-2 rounded-md">
+          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})} className="md:inline-block text-bold bg-red-500 mx-5 text-slate-200 px-3 py-2 rounded-md hidden">
             See specials
           </button>
         </div>
@@ -134,13 +134,15 @@ const categoryList = [
         ""
       )}
       { product.product.length > 0?
-      <div className="my-5">
+      <div className="md:my-5 md:block hidden">
         <h2 className="font-bold text-2xl text-slate-800 mb-4">Specials</h2>
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center ">
           {categoryList.length > 0 &&
             categoryList.map((ele,ind) => {
               return (
+                <div className='flex flex-wrap md:block'>
                 <FilterProd datas={ele} setDisplay={setDisplay} key={ind}/>
+                </div>
               );
             })}
         </div>
