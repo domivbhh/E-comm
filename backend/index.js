@@ -6,6 +6,7 @@ const app=express()
 dotenv.config()
 const userRouter=require('./routes/userRoutes.js')
 const productRouter=require('./routes/productRoutes.js')
+const path=require('path')
 
 app.use(cors())
 app.use(express.json({limit:'10mb'}))
@@ -20,5 +21,12 @@ app.listen(process.env.PORT, () => {
     console.log(e)
 })
 
+const __dirname=path.resolve()
+
 app.use('/product',productRouter)
 app.use('/auth',userRouter)
+app.use(express.static(path.join(__dirname,'/frontend/dist')))
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'frontend','dist','index.html'))
+})
