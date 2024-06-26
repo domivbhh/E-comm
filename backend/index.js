@@ -6,7 +6,7 @@ const app=express()
 dotenv.config()
 const userRouter=require('./routes/userRoutes.js')
 const productRouter=require('./routes/productRoutes.js')
-const path=require('path')
+// const path=require('path')
 
 app.use(cors())
 // let __dirname = path.resolve();
@@ -25,8 +25,8 @@ app.listen(process.env.PORT, () => {
 
 app.use('/product',productRouter)
 app.use('/auth',userRouter)
-app.use(express.static(path.join(__dirname,'/frontend/dist')))
+// app.use(express.static(path.join(__dirname,'/frontend/dist')))
 
-app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'frontend','dist','index.html'))
-})
+// app.get('*',(req,res)=>{
+//   res.sendFile(path.join(__dirname,'frontend','dist','index.html'))
+// })
