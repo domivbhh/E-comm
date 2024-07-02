@@ -9,19 +9,24 @@ import {loginUser} from '../store/slice.js'
 
 
 const Signin = () => {
+
+  // hooks
   const dispatch=useDispatch()
   const [data, setData] = useState({
   email: "",
   password: "",
 });
-
 const navigate=useNavigate()
 
+
+//input handling 
     const handleChange = (e) => {
       setData({ ...data, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async(e) => {
+
+// handling form submission 
+   const handleSubmit = async(e) => {
       e.preventDefault();
       const {  email,password  } = data;
       if (email.trim()!=='' || password.trim()!=='') {
@@ -40,8 +45,7 @@ const navigate=useNavigate()
         dispatch(loginUser(resp.data))
         localStorage.setItem('user',JSON.stringify(resp.data))
         const datas=localStorage.getItem('user')
-        console.log(datas)
-          toast.success(`Welcome ${resp.data.firstname}`);   
+          toast.success(`Welcome ${resp.data[0].firstname}`);   
         navigate('/')      
         }
         else{
@@ -60,7 +64,6 @@ const navigate=useNavigate()
     return (
     <div className="p-3 md:p-4">
       <div className="w-full max-w-md bg-white m-auto flex items-center flex-col p-4">
-        {/* <h1 className='text-center text-2xl font-bold'>Signup</h1> */}
         <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md">
           <img src={loginSignupImage} alt="" className="w-full" />
         </div>
@@ -78,7 +81,6 @@ const navigate=useNavigate()
             name="email"
             className="mt-1 mb-2 w-full bg-slate-300 py-1 px-2 rounded-lg focus-within:outline-blue-500"
           />
-          {/* <input type="text" id='lastName' name='lastName' className='mt-1 mb-2 w-full bg-slate-300 py-1 px-2 rounded-lg' /> */}
           <label htmlFor="" className="">
             Password
           </label>

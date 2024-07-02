@@ -1,10 +1,12 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 
-// var validateEmail = function (email) {
-//   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-//   return re.test(email);
-// };
+//function for email validation
+var validator=function (value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
 
+
+//user schema validation
 const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
@@ -19,25 +21,27 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
     validate: {
-      validator: function (value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      },
+      validator,
       message: "Invalid email address format",
     },
   },
-  image:{
-    type:String
+  image: {
+    type: String,
   },
-  password:{
-    type:String,
-    required:true
+  password: {
+    type: String,
+    required: true,
+    selected: false,
   },
-  confirmpassword:{
-    type:String,
-    required:true
-  }
-
+  confirmpassword: {
+    type: String,
+    required: true,
+    selected: false,
+  },
 });
 
-const User=mongoose.model("User",userSchema)
-module.exports=User
+
+
+//user model
+const User = mongoose.model("User", userSchema);
+module.exports = User;

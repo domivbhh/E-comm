@@ -5,8 +5,16 @@ import { addToCart, deleteCart } from '../store/cartSlice';
 
 
 const CardFeature = ({data}) => {
+
+  //hooks
   const dispatch=useDispatch()
+
+
+  //destructuring from props
   const{name,price,description,image,category}=data
+
+
+
     return (
       <div className="w-80 mx-8 justify-between bg-white drop-shadow-md px-4 py-5 hover:shadow-md border hover:scale-105 transition-all flex flex-col">
         <div className="h-28 flex flex-col justify-center items-center">
@@ -22,9 +30,7 @@ const CardFeature = ({data}) => {
         <button className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer"  onClick={()=>dispatch(addToCart(data))}>
           Add to Cart
         </button>
-        {/* <button className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer"  onClick={()=>dispatch(deleteCart(data))}>
-          delete
-        </button> */}
+     
       </div>
     );
 }

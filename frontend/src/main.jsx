@@ -6,7 +6,7 @@ import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 import Error from './components/Error.jsx'
 import About from './Pages/About.jsx'
 import Contact from './Pages/Contact.jsx'
-import Menu from './Pages/Menu.jsx'
+// import Menu from './Pages/Menu.jsx'
 import Login from './Pages/Login.jsx'
 // import Product from './Pages/Product.jsx'
 import Signin from './Pages/Signin.jsx'
@@ -44,11 +44,7 @@ const router = createBrowserRouter([
         element: <Contact />,
         errorElement: <Error />,
       },
-      {
-        path: "/menu",
-        element: <Menu />,
-        errorElement: <Error />,
-      },
+      
       {
         path: "/login",
         element: <Signin/>,
@@ -81,7 +77,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
 <Provider store={store}>
 
   {/* <PersistGate persistor={persistor} loading={null}> */}
@@ -91,5 +87,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   {/* </PersistGate> */}
 
 </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

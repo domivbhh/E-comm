@@ -1,5 +1,7 @@
 const mongoose=require('mongoose')
 
+
+//product schema validation
 const productSchema=new mongoose.Schema({
     name:{
         type:String,
@@ -21,5 +23,7 @@ const productSchema=new mongoose.Schema({
 
 })
 
+
+//product model
 const productModel=mongoose.model('Product',productSchema)
 module.exports=productModel

@@ -1,7 +1,6 @@
 const HomeCard=({ele})=>{
     const {name,image,category,price}=ele
     return(
-        // <div className="bg-white shadow-md p-2 rounded min-w-[150px]">
         <div>
         {name &&
             (<div>

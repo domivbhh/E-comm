@@ -8,20 +8,18 @@ import CardFeature from './CardFeature.jsx';
 
 
 const Product = () => {
-  // const [datas,setDatas]=useState([])
+  
+  //hooks
   const dispatch=useDispatch()
   const datas=useSelector((state)=>state.product)
-  // console.log(datas.product)
+
+//filtering products
   const vegetables=datas.product.filter((ele)=>ele.category==='vegetable')
   const rice=datas.product.filter((ele)=>ele.category==='rice')
   const fruit=datas.product.filter((ele)=>ele.category==='fruit')
   const sweets = datas.product.filter((ele) => ele.category === "sweets");
   const chats = datas.product.filter((ele) => ele.category === "sweets");
 
-  // console.log(vegetables)
-  // console.log(rice)
-  // console.log(fruit)
-  // console.log(sweets)
 
 return (
   <div>
@@ -41,7 +39,7 @@ return (
       </h2>
       <div className="flex gap-4 justify-evenly flex-wrap">
         {fruit.map((ele) => (
-          <CardFeature data={ele} />
+          <CardFeature data={ele} key={ele._id}/>
         ))}
       </div>
     </div>
@@ -51,7 +49,7 @@ return (
       </h2>
       <div className="flex gap-4 justify-center flex-wrap">
         {rice.map((ele) => (
-          <CardFeature data={ele} />
+          <CardFeature data={ele} key={ele._id} />
         ))}
       </div>
     </div>
@@ -61,7 +59,7 @@ return (
       </h2>
       <div className="flex gap-4 justify-center flex-wrap">
         {sweets.map((ele) => (
-          <CardFeature data={ele} />
+          <CardFeature data={ele} key={ele._id} />
         ))}
       </div>
     </div>
@@ -71,7 +69,7 @@ return (
       </h2>
       <div className="flex gap-4 justify-center flex-wrap">
         {chats.map((ele) => (
-          <CardFeature data={ele} />
+          <CardFeature data={ele} key={ele._id}/>
         ))}
       </div>
     </div>

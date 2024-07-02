@@ -8,13 +8,13 @@ import { addToCart, deleteCart, removeCart } from '../store/cartSlice';
 
 
 const Cart = () => {
-  // const user=useSelector((state)=>state.user)
+    // hooks
   const dispatch=useDispatch()
-    // console.log(user)
     const cart=useSelector((state)=>state.cart)
-    // console.log(cart.cart,cart.total)
     const datas = localStorage.getItem("user");
     const user=JSON.parse(datas);
+
+
 
     if(user?.firstname===undefined){
          return (
@@ -24,7 +24,6 @@ const Cart = () => {
                alt=""
                className="w-1/5 h-1/5 mx-auto"
              />
-             {/* <h1>Please Login...! </h1> */}
              <p className="text-md text-slate-400">
                <Link to={"/login"}> Click here to Login</Link>
              </p>
@@ -57,7 +56,7 @@ const Cart = () => {
               </p>
               <div className="md:flex md:justify-evenly mx-auto">
                 <button
-                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 mx-10 "
+                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 md:mx-4 mx-10"
                   onClick={() => dispatch(deleteCart(ele))}
                 >
                   -
@@ -86,15 +85,14 @@ const Cart = () => {
                   remove
                 </p>
               </div>
-              {/* <button className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer"  onClick={()=>dispatch(deleteCart(data))}>
-          delete
-        </button> */}
             </div>
           </div>
         );
       })}
+
+      {/* cart summary */}
       {cart.cart.length > 0 ? (
-        <div className="md:w-full md:max-w-md md:ml-[35%] mx-10">
+        <div className="md:w-full md:max-w-md md:ml-[30%] mx-10">
           <h2 className="bg-slate-500 text-white p-2 text-lg">Summary</h2>
           <div className="flex w-full">
             <p className="mx-auto text-lg md:text-2xl font-bold text-red-600">
@@ -116,7 +114,7 @@ const Cart = () => {
             src="https://cdn.dribbble.com/users/461802/screenshots/4421003/emptycart.gif"
             className="my-20 mx-auto w-60 h-60"
           />
-          <p className='md:ml-[42%] ml-24 text-slate-600'>
+          <p className='md:ml-[42%] ml-20 text-slate-600'>
             Go to product page--<Link className='text-red-700' to={"/products"}>Click here</Link>
           </p>
         </div>

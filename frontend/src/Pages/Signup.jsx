@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import loginSignupImage from '../assest/login-animation.gif'
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import ImagetoBase64 from '../utils/imgtobase64.js';
+import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
+import { app } from '../utils/firebase.js';
 
 const Signup = () => {
     const[data,setData]=useState({
@@ -14,9 +16,13 @@ const Signup = () => {
         confirmpassword:""
     })
     const navigate=useNavigate()
+    const[img,setImg]=useState(undefined)
+    const[error,setError]=useState(undefined)
+    const[perc,setPerc]=useState(undefined)
 
 
-    // console.log(process.env.REACT_APP_SERVER_DOMAIN);
+    console.log('error',error);
+    console.log(data)
 
 
     const handleChange=(e)=>{
@@ -57,12 +63,37 @@ const Signup = () => {
     }
 
 
-    const handleProfileImage=async (file)=>{
-        // console.log(file[0])
-        const imgs=await ImagetoBase64(file[0])
-        console.log(imgs)
-        setData({...data,image:imgs})
+    const handleProfileImage= (file)=>{
+      const storage=getStorage(app)
+      const fileName=new Date().getTime()+file.name
+      const storageRef=ref(storage,fileName)
+      const uploadTask=uploadBytesResumable(storageRef,file)
+
+      uploadTask.on('state_changed',(snapshot)=>{
+        const progress=(snapshot.bytesTransferred/snapshot.totalBytes)*100
+        setPerc(Math.round(progress))
+      },
+      (error)=>{
+        setError(error)
+      },
+      ()=>{
+        getDownloadURL(uploadTask.snapshot.ref).then((url)=>setData({...data,image:url}))
+      }
+    )        
     }
+
+    const handleImages=(images)=>{
+      setImg(images[0])
+      // setImg(e && e[0])
+    }
+
+
+    useEffect(()=>{
+      if(img){
+        handleProfileImage(img)
+      }
+    
+    },[img])
 
 
 
@@ -76,7 +107,7 @@ const Signup = () => {
             <div className="absolute bottom-0 h-1/3 bg-slate-500 w-full text-center bg-opacity-70">
               <p className="text-sm p-1 text-white">Upload</p>
             </div>
-            <input type="file" id="profile" className="hidden "onChange={(e)=>handleProfileImage(e.target.files)} accept='image/*' />
+            <input type="file" id="profile" className="hidden "onChange={(e)=>handleImages(e.target.files)} accept='image/*' />
           </label>
         </div>
 

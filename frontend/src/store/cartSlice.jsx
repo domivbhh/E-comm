@@ -8,18 +8,14 @@ const cartSlice=createSlice({
         total:0,
         totalQty:0
     },
-    reducers:{
-        addToCart:(state,action)=>{
-                  
-            const index=state.cart.findIndex((ele)=>ele._id===action.payload._id)
     
-          
+    reducers:{
+    // cart item adding reducer function
+        addToCart:(state,action)=>{          
+            const index=state.cart.findIndex((ele)=>ele._id===action.payload._id)          
             if(index>-1){
             state.cart[index].qty+=1;
-            
-            // const items = state.cart[index].price*state.cart[index].qty;
             state.total += state.cart[index].price;
-            
             }
             else{
               state.cart = [...state.cart, { ...action.payload, qty: 1 }];
@@ -31,6 +27,8 @@ const cartSlice=createSlice({
 
             
         },
+
+        //cart item delete reducer function
         deleteCart:(state,action)=>{
             const index = state.cart.findIndex(
               (ele) => ele._id === action.payload._id
@@ -49,6 +47,8 @@ const cartSlice=createSlice({
             state.totalQty-=1
             
         },
+
+        //removing entire cart item
          removeCart:(state,action)=>{
                     console.log(action.payload)
                 state.totalQty -= state.cart[action.payload].qty;
@@ -56,9 +56,6 @@ const cartSlice=createSlice({
                 state.cart.splice(action.payload,1)
                 toast.success('one item deleted')
             }
-         
-            
-
         }
     }
 )

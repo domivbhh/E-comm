@@ -5,14 +5,11 @@ import CardFeature from '../Pages/CardFeature';
 
 
 const DisplayProd = ({data}) => {
-    // console.log(data)
+    //hooks
     const[datas,setDatas]=useState([])
-    const product = useSelector((state) => state.product);
-    // console.log(product.product)
-    
+    const product = useSelector((state) => state.product);  
     useEffect(()=>{
         setDatas(product.product.filter((ele)=>ele.category.toLowerCase()===data))
-        // console.log(datas)
     },[data])
     
 
