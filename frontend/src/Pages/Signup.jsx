@@ -3,8 +3,8 @@ import loginSignupImage from '../assest/login-animation.gif'
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import ImagetoBase64 from '../utils/imgtobase64.js';
-import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
-import { app } from '../utils/firebase.js';
+import { API_URL } from "../constants/app.constant.js";
+
 
 const Signup = () => {
     const[data,setData]=useState({
@@ -36,7 +36,9 @@ const Signup = () => {
         const{firstname,email,lastname,password,confirmpassword}=data
         if(firstname && email && password && confirmpassword ){
             if(password===confirmpassword){
-              const fetchData = await fetch("http://localhost:4000/auth/signup",{
+              const url = `http://localhost:4000/auth/signup`;
+              
+              const fetchData = await fetch(url,{
                 method:'POST',
                 headers:{
                   "content-type":"application/json",

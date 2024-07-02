@@ -10,6 +10,7 @@ import Shimmer from '../components/Shimmer.jsx';
 import FilterProd from '../components/FilterProd.jsx';
 import DisplayProd from '../components/DisplayProd.jsx';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../constants/app.constant.js';
 
 
 
@@ -39,7 +40,13 @@ const Home = () => {
 
 //function for fetching products
   const fetchProducts = async () => {
+<<<<<<< HEAD
     const data = await fetch(`http://localhost:4000/product/products/${product.pages}/${limit}`);
+=======
+    const url = `${API_URL}/product/get`;
+
+    const data = await fetch(url);
+>>>>>>> 3d080af455fc647945f46ff5faeca02fee47e98d
     const resp = await data.json();
     resp.data.map((ele)=>{
       dispatch(setProduct(ele));

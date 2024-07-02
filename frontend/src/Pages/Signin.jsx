@@ -4,6 +4,7 @@ import { Link,useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch } from 'react-redux';
 import {loginUser} from '../store/slice.js'
+import { API_URL } from '../constants/app.constant.js';
 
 
 
@@ -30,7 +31,9 @@ const navigate=useNavigate()
       e.preventDefault();
       const {  email,password  } = data;
       if (email.trim()!=='' || password.trim()!=='') {
-        const result = await fetch("http://localhost:4000/auth/signin", 
+        const url = `http://localhost:4000/auth/signin`;
+
+        const result = await fetch(url, 
           {
           method:'POST',
            headers:{
