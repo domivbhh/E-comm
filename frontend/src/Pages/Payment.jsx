@@ -96,7 +96,7 @@ const Payment = () => {
           placeholder="MM/YY"
         />
         <input
-          className="md:w-1/2 w-full p-2 md:ml-12"
+          className="md:w-1/3 w-full p-2 md:ml-12"
           type="text"
           placeholder="CVC "
         />
