@@ -45,9 +45,8 @@ const navigate=useNavigate()
         
         //checking user info from backend
         if(resp.status==='success'){
-        dispatch(loginUser(resp.data[0]))
-        localStorage.setItem('user',JSON.stringify(resp.data))
-        const datas=localStorage.getItem('user')
+          localStorage.setItem('user',JSON.stringify(resp.data[0]))
+          dispatch(loginUser(resp.data[0]))
         toast.success(`Welcome ${resp.data[0].firstname}`);   
         navigate('/')      
         }

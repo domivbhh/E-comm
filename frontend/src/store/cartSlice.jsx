@@ -55,12 +55,16 @@ const cartSlice=createSlice({
                 state.total-=state.cart[action.payload].qty*state.cart[action.payload].price
                 state.cart.splice(action.payload,1)
                 toast.success('one item deleted')
-            }
+            },
+        clearCart:(state)=>{
+            state.cart=[]
+            state.total=0
+        }
         }
     }
 )
 
 
 
-export const{addToCart,deleteCart,removeCart}=cartSlice.actions
+export const{addToCart,deleteCart,removeCart,clearCart}=cartSlice.actions
 export default cartSlice.reducer

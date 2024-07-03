@@ -13,10 +13,11 @@ const Cart = () => {
     const cart=useSelector((state)=>state.cart)
     const datas = localStorage.getItem("user");
     const user=JSON.parse(datas);
+    // console.log(user)
 
 
 
-    if(user && user[0]?.firstname===undefined){
+    if(!user){
          return (
            <div className="w-1/2 h-1/5  text-2xl  text-center font-bold mx-auto">
              <img

@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useCallback } from 'react'
 import { IoCloudUploadOutline } from "react-icons/io5";
-import ImagetoBase64 from "../utils/imgtobase64.js";
+// import ImagetoBase64 from "../utils/imgtobase64.js";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { setPages, setProduct } from "../store/productSlice.jsx";
@@ -10,7 +10,6 @@ import Shimmer from '../components/Shimmer.jsx';
 import FilterProd from '../components/FilterProd.jsx';
 import DisplayProd from '../components/DisplayProd.jsx';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../constants/app.constant.js';
 
 
 

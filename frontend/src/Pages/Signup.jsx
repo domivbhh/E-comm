@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import loginSignupImage from '../assest/login-animation.gif'
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import ImagetoBase64 from '../utils/imgtobase64.js';
+// import ImagetoBase64 from '../utils/imgtobase64.js';
 import { API_URL } from "../constants/app.constant.js";
 
 
@@ -64,24 +64,24 @@ const Signup = () => {
     }
 
 
-    const handleProfileImage= (file)=>{
-      const storage=getStorage(app)
-      const fileName=new Date().getTime()+file.name
-      const storageRef=ref(storage,fileName)
-      const uploadTask=uploadBytesResumable(storageRef,file)
+    // const handleProfileImage= (file)=>{
+    //   const storage=getStorage(app)
+    //   const fileName=new Date().getTime()+file.name
+    //   const storageRef=ref(storage,fileName)
+    //   const uploadTask=uploadBytesResumable(storageRef,file)
 
-      uploadTask.on('state_changed',(snapshot)=>{
-        const progress=(snapshot.bytesTransferred/snapshot.totalBytes)*100
-        setPerc(Math.round(progress))
-      },
-      (error)=>{
-        setError(error)
-      },
-      ()=>{
-        getDownloadURL(uploadTask.snapshot.ref).then((url)=>setData({...data,image:url}))
-      }
-    )        
-    }
+    //   uploadTask.on('state_changed',(snapshot)=>{
+    //     const progress=(snapshot.bytesTransferred/snapshot.totalBytes)*100
+    //     setPerc(Math.round(progress))
+    //   },
+    //   (error)=>{
+    //     setError(error)
+    //   },
+    //   ()=>{
+    //     getDownloadURL(uploadTask.snapshot.ref).then((url)=>setData({...data,image:url}))
+    //   }
+    // )        
+    // }
 
     const handleImages=(images)=>{
       setImg(images[0])
@@ -101,8 +101,8 @@ const Signup = () => {
   return (
     <div className="p-3 md:p-4">
       <div className="w-full max-w-md bg-white m-auto flex items-center flex-col p-4">
-        {/* <h1 className='text-center text-2xl font-bold'>Signup</h1> */}
-        <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md">
+        <h1 className='text-center text-2xl font-bold'>Signup</h1>
+        {/* <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md">
           <img src={data.image? data.image : loginSignupImage} alt="" className="w-auto h-20 object-cover" />
           <label htmlFor="profile" className="cursor-pointer">
             <div className="absolute bottom-0 h-1/3 bg-slate-500 w-full text-center bg-opacity-70">
@@ -110,7 +110,7 @@ const Signup = () => {
             </div>
             <input type="file" id="profile" className="hidden "onChange={(e)=>handleImages(e.target.files)} accept='image/*' />
           </label>
-        </div>
+        </div> */}
 
         <form action="" className="py-2" onSubmit={handleSubmit}>
           <label htmlFor="" className="">

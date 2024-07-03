@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../store/slice';
 import toast from 'react-hot-toast';
-import useOnlineCheck from '../utils/useOnlineCheck';
 
 const Header = () => {
   const navigate=useNavigate()
@@ -93,12 +92,12 @@ const Header = () => {
                   ""
                 )}
 
-                {user && user[0]?.firstname ? (
+                {user && user?.firstname ? (
                   <p
                     className="whitespace-nowrap right-0 font-sm cursor-pointer"
                     onClick={() => handleLogout()}
                   >
-                    Logout {user[0]?.firstname}
+                    Logout {user?.firstname}
                   </p>
                 ) : (
                   <Link to={"/login"}>
