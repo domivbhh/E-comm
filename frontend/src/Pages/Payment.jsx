@@ -90,7 +90,7 @@ const Payment = () => {
         <input
           className="md:w-1/3 w-full p-2 md:ml-1"
           type="text"
-          name='expiry'
+          name='cardExp'
           value={data.cardExp}
           onChange={handleChange}
           placeholder="MM/YY"
