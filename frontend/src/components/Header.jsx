@@ -1,13 +1,8 @@
 import React, { useState } from 'react'
-// import logo from '../assest/logo.png'
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-
-
-
-
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../store/slice';
 import toast from 'react-hot-toast';
@@ -24,7 +19,7 @@ const Header = () => {
 
   const datas = localStorage.getItem("user");
   const user = JSON.parse(datas);
-  // console.log(user)
+  // console.log(user[0])
 
   
   // const statusCheck=useOnlineCheck()
@@ -98,12 +93,12 @@ const Header = () => {
                   ""
                 )}
 
-                {user?.firstname ? (
+                {user && user[0]?.firstname ? (
                   <p
                     className="whitespace-nowrap right-0 font-sm cursor-pointer"
                     onClick={() => handleLogout()}
                   >
-                    Logout {user?.firstname}
+                    Logout {user[0]?.firstname}
                   </p>
                 ) : (
                   <Link to={"/login"}>

@@ -40,14 +40,9 @@ const Home = () => {
 
 //function for fetching products
   const fetchProducts = async () => {
-<<<<<<< HEAD
     const data = await fetch(`http://localhost:4000/product/products/${product.pages}/${limit}`);
-=======
-    const url = `${API_URL}/product/get`;
-
-    const data = await fetch(url);
->>>>>>> 3d080af455fc647945f46ff5faeca02fee47e98d
     const resp = await data.json();
+    console.log(resp)
     resp.data.map((ele)=>{
       dispatch(setProduct(ele));
     })
@@ -85,10 +80,7 @@ const categoryList = [
       <div className="md:flex gap-4 py-2">
         <div className="md:w-1/2 py-4">
           <div className="md:flex flex-row gap-3 md:w-1/4 items-center rounded-full md:h-10 h-18 hidden bg-slate-400 px-2 ">
-            <p className="font-semibold text-white">
-              {" "}
-              Bike-Delivery
-            </p>
+            <p className="font-semibold text-white"> Bike-Delivery</p>
             <img
               src="https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-bicycle-icon-png-image_3985605.jpg"
               alt=""
@@ -105,26 +97,33 @@ const categoryList = [
             service for the recipient.
           </p>
           <button className="text-bold bg-red-500 text-slate-200 px-3 py-2 rounded-md">
-            <Link to={'/products'}>All Products</Link>
+            <Link to={"/products"}>All Products</Link>
           </button>
-          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})} className="md:inline-block text-bold bg-red-500 mx-5 text-slate-200 px-3 py-2 rounded-md hidden">
+          <button
+            onClick={() =>
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              })
+            }
+            className="md:inline-block text-bold bg-red-500 mx-5 text-slate-200 px-3 py-2 rounded-md hidden"
+          >
             See specials
           </button>
+
+          <img src="https://www.jimphicdesigns.com/downloads/imgs-mockup/green-arrow-outline-pointing-down-animation.gif" className='w-20 h-20 rounded-full mt-[10%] ml-[100%]'/>
         </div>
         <div className="md:w-1/2 flex flex-wrap gap-5 p-4 justify-center">
-
-
-{/* //images for home container */}
+          {/* //images for home container */}
           {product.product.length > 0
             ? product.product?.slice(0, 5).map((ele) => {
                 return <HomeCard ele={ele} key={ele._id} />;
               })
-            : loadingArray.map((ele,ind) => <Shimmer key={ind} />)}
+            : loadingArray.map((ele, ind) => <Shimmer key={ind} />)}
         </div>
       </div>
 
-
-{/* //vegetable section */}
+      {/* //vegetable section */}
       {vegetableProduct.length > 0 ? (
         <div className="">
           <div className="flex w-full items-center">
@@ -133,18 +132,16 @@ const categoryList = [
             </h2>
           </div>
           <div className="flex gap-3 flex-wrap justify-center ">
-            {
-              vegetableProduct.map((ele) => {
-                return <CardFeature data={ele} key={ele._id+'vege'}/>;
-              })
-            }
+            {vegetableProduct.map((ele) => {
+              return <CardFeature data={ele} key={ele._id + "vege"} />;
+            })}
           </div>
         </div>
       ) : (
         ""
       )}
 
-{/* fruit sections */}
+      {/* fruit sections */}
       {fruitProduct.length > 0 ? (
         <div className="">
           <h2 className="font-bold text-2xl text-slate-800 my-4 ">
@@ -152,7 +149,7 @@ const categoryList = [
           </h2>
           <div className="flex gap-3 flex-wrap justify-center">
             {fruitProduct.map((ele) => {
-              return <CardFeature data={ele} key={ele._id+"fruit"} />;
+              return <CardFeature data={ele} key={ele._id + "fruit"} />;
             })}
           </div>
         </div>
@@ -160,26 +157,27 @@ const categoryList = [
         ""
       )}
 
-
-{/* specials section */}
-      { product.product.length > 0?
-      <div className="md:my-5 md:block hidden">
-        <h2 className="font-bold text-2xl text-slate-800 mb-4">Specials</h2>
-        <div className="flex gap-4 justify-center ">
-          {categoryList.length > 0 &&
-            categoryList.map((ele,ind) => {
-              return (
-                <div className='flex flex-wrap md:block' key={ele}>
-                <FilterProd datas={ele} setDisplay={setDisplay} />
-                </div>
-              );
-            })}
+      {/* specials section */}
+      {product.product.length > 0 ? (
+        <div className="md:my-5 md:block hidden">
+          <h2 className="font-bold text-2xl text-slate-800 mb-4">Specials</h2>
+          <div className="flex gap-4 justify-center ">
+            {categoryList.length > 0 &&
+              categoryList.map((ele, ind) => {
+                return (
+                  <div className="flex flex-wrap md:block" key={ele}>
+                    <FilterProd datas={ele} setDisplay={setDisplay} />
+                  </div>
+                );
+              })}
+          </div>
+          <div>
+            <DisplayProd data={display} />
+          </div>
         </div>
-        <div>
-          <DisplayProd data={display} />
-        </div>
-      </div>:''
-      }
+      ) : (
+        ""
+      )}
     </div>
   );
 }

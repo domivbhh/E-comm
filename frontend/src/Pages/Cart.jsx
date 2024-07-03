@@ -16,7 +16,7 @@ const Cart = () => {
 
 
 
-    if(user?.firstname===undefined){
+    if(user && user[0]?.firstname===undefined){
          return (
            <div className="w-1/2 h-1/5  text-2xl  text-center font-bold mx-auto">
              <img
@@ -43,7 +43,7 @@ const Cart = () => {
       {cart.cart.map((ele, ind) => {
         return (
           <div className="flex flex-wrap md:justify-evenly " key={ele._id}>
-            <div className="mx-auto justify-between bg-white drop-shadow-md my-5 px-4 py-5 hover:shadow-md border hover:scale-105 transition-all flex flex-col w-1/2 md:w-1/4">
+            <div className="mx-auto justify-between bg-white drop-shadow-md my-5 px-4 py-5 hover:shadow-md border hover:scale-105 transition-all flex flex-col w-1/2 md:w-1/2">
               <div className="h-28 flex flex-col justify-center items-center">
                 <img src={ele.image} alt="" className="h-full" />
               </div>
@@ -54,9 +54,9 @@ const Cart = () => {
               <p className=" font-medium text-center text-green-500">
                 ₹{ele.price}
               </p>
-              <div className="md:flex md:justify-evenly mx-auto">
+              <div className="md:flex md:justify-between ">
                 <button
-                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 md:mx-4 mx-10"
+                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 md:mx-16 m-[38%] md:p-2"
                   onClick={() => dispatch(deleteCart(ele))}
                 >
                   -
@@ -66,7 +66,7 @@ const Cart = () => {
                 </p>
 
                 <button
-                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 mx-10 "
+                  className="bg-yellow-500 py-1 my-2 rounded-lg cursor-pointer w-8 mx-[38%] md:mx-16 md:p-2"
                   onClick={() => dispatch(addToCart(ele))}
                 >
                   +
@@ -92,8 +92,10 @@ const Cart = () => {
 
       {/* cart summary */}
       {cart.cart.length > 0 ? (
-        <div className="md:w-full md:max-w-md md:ml-[30%] mx-10">
-          <h2 className="bg-slate-500 text-white p-2 text-lg">Summary</h2>
+        <div className="md:w-1/2 md:ml-[25%] mx-10">
+          <h2 className="bg-slate-500 text-white p-2 text-lg text-center">
+            Summary
+          </h2>
           <div className="flex w-full">
             <p className="mx-auto text-lg md:text-2xl font-bold text-red-600">
               Total qty-{cart.totalQty}
@@ -105,7 +107,7 @@ const Cart = () => {
             </p>
           </div>
           <button className="from-red-500 to-slate-400 w-full text-white bg-gradient-to-r h-12">
-            Payment
+            <Link to={"/payment"}>Payment</Link>
           </button>
         </div>
       ) : (
@@ -114,8 +116,11 @@ const Cart = () => {
             src="https://cdn.dribbble.com/users/461802/screenshots/4421003/emptycart.gif"
             className="my-20 mx-auto w-60 h-60"
           />
-          <p className='md:ml-[42%] ml-20 text-slate-600'>
-            Go to product page--<Link className='text-red-700' to={"/products"}>Click here</Link>
+          <p className="md:ml-[42%] ml-20 text-slate-600">
+            Go to product page--
+            <Link className="text-red-700" to={"/products"}>
+              Click here
+            </Link>
           </p>
         </div>
       )}

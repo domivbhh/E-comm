@@ -30,25 +30,25 @@ const navigate=useNavigate()
    const handleSubmit = async(e) => {
       e.preventDefault();
       const {  email,password  } = data;
-      if (email.trim()!=='' || password.trim()!=='') {
-        const url = `http://localhost:4000/auth/signin`;
+      if (email.trim()!=='' || password.trim()!=='') 
+        {
+        const result = await fetch("http://localhost:4000/auth/signin", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-        const result = await fetch(url, 
-          {
-          method:'POST',
-           headers:{
-                  "content-type":"application/json",
-                },
-           body:JSON.stringify({email,password})
-              }
-        );
         const resp = await result.json();
+
         
+        //checking user info from backend
         if(resp.status==='success'){
-        dispatch(loginUser(resp.data))
+        dispatch(loginUser(resp.data[0]))
         localStorage.setItem('user',JSON.stringify(resp.data))
         const datas=localStorage.getItem('user')
-          toast.success(`Welcome ${resp.data[0].firstname}`);   
+        toast.success(`Welcome ${resp.data[0].firstname}`);   
         navigate('/')      
         }
         else{

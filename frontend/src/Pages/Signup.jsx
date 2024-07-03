@@ -22,7 +22,6 @@ const Signup = () => {
 
 
     console.log('error',error);
-    console.log(data)
 
 
     const handleChange=(e)=>{

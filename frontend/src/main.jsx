@@ -17,6 +17,7 @@ import Home from './Pages/Home.jsx'
 import NewProducts from './Pages/NewProducts.jsx'
 import Cart from './Pages/Cart.jsx'
 import { PersistGate } from 'redux-persist/integration/react';
+import Payment from './Pages/Payment.jsx'
 // import { persistor } from './store/store.js'
 
 
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
         path:'/new-product',
         element:<NewProducts/>,
         errorElement:<Error/>
+      },
+      {
+          path:'/payment',
+          element:<Payment/>,
+          errorElement:<Error/>
       }
     ],
   },
