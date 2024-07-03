@@ -52,7 +52,7 @@ const Payment = () => {
                 </div>
                 <div className='mr-6'>
                   <p>{ele.price*ele.qty}</p>
-                  <p className="text-gray-400">{(ele.price*ele.qty )/ ele.qty}/each</p>
+                  <p className="text-gray-400">{(ele.price*ele.qty )/ ele.qty}/kg each</p>
                 </div>
               </div>
             );
