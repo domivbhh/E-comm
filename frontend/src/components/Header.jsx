@@ -18,7 +18,7 @@ const Header = () => {
 
   const datas = localStorage.getItem("user");
   const user = JSON.parse(datas);
-  // console.log(user[0])
+  // console.log(user && user)
 
   
   // const statusCheck=useOnlineCheck()
@@ -68,7 +68,7 @@ const Header = () => {
             onClick={() => setShow(!show)}
           >
             <div className="text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden shadow-md drop-shadow-md ">
-              {user?.image ? (
+              {user && user?.image ? (
                 <img
                   src={user?.image}
                   className="object-cover"

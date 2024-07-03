@@ -39,7 +39,9 @@ const Home = () => {
 
 //function for fetching products
   const fetchProducts = async () => {
-    const data = await fetch(`http://localhost:4000/product/products/${product.pages}/${limit}`);
+    const data = await fetch(
+      `https://e-comm-backend-l9pn.onrender.com/product/products/${product.pages}/${limit}`
+    );
     const resp = await data.json();
     console.log(resp)
     resp.data.map((ele)=>{

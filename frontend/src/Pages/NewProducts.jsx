@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { IoCloudUploadOutline } from "react-icons/io5";
-// import ImagetoBase64 from "../utils/imgtobase64.js";
 import toast from "react-hot-toast";
-import { API_URL } from '../constants/app.constant.js';
 
 
 const NewProducts = () => {
@@ -29,7 +27,7 @@ const NewProducts = () => {
      const { name, image, price, category } = data;
 
      if (name && image && price && category) {
-      const url = `${API_URL}/product/post`;
+      const url = `https://e-comm-backend-l9pn.onrender.com/product/products`;
 
        const fetchData = await fetch(url, {
          method: "POST",

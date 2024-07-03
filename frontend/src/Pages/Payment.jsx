@@ -19,7 +19,7 @@ const Payment = () => {
 
   }
  
-  console.log(data)
+  // console.log(data)
   const handleSubmit=(e)=>{
     e.preventDefault()
     setData({
@@ -45,14 +45,14 @@ const Payment = () => {
         <div className="my-5">
           {cart.map((ele) => {
             return (
-              <div className="flex justify-evenly mx-0 mb-8">
-                <div className="">
-                  <p>{ele.name}</p>
+              <div className="flex justify-between mx-0 mb-8">
+                <div className="ml-6">
+                  <p className='text-green-700'>{ele.name}</p>
                   <p>qty:{ele.qty}</p>
                 </div>
-                <div>
-                  <p>{ele.price}</p>
-                  <p className="text-gray-400">{ele.price / ele.qty}/each</p>
+                <div className='mr-6'>
+                  <p>{ele.price*ele.qty}</p>
+                  <p className="text-gray-400">{(ele.price*ele.qty )/ ele.qty}/each</p>
                 </div>
               </div>
             );
@@ -64,7 +64,7 @@ const Payment = () => {
           </p>
         </div>
       </div>
-      <form className="md:w-1/3 w-3/4 mx-auto md:mx-5 bg-gray-300 " onSubmit={handleSubmit}>
+      <form className="md:w-1/3 w-3/4 mx-auto md:mx-5 bg-gray-300 p-5 " onSubmit={handleSubmit}>
         <h2 className="font-medium mb-5">Pay with card</h2>
         <label className="font-medium mb-5">Email</label>
         <br />

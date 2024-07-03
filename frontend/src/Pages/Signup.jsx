@@ -21,7 +21,7 @@ const Signup = () => {
     const[perc,setPerc]=useState(undefined)
 
 
-    console.log('error',error);
+    // console.log('error',error);
 
 
     const handleChange=(e)=>{
@@ -35,7 +35,7 @@ const Signup = () => {
         const{firstname,email,lastname,password,confirmpassword}=data
         if(firstname && email && password && confirmpassword ){
             if(password===confirmpassword){
-              const url = `http://localhost:4000/auth/signup`;
+              const url = `https://e-comm-backend-l9pn.onrender.com/auth/signup`;
               
               const fetchData = await fetch(url,{
                 method:'POST',
@@ -50,7 +50,9 @@ const Signup = () => {
               }
               else{
                   toast(resp.message);
-                  navigate('/login')
+                  navigate(
+                    "https://e-comm-backend-l9pn.onrender.com/auth/signin"
+                  );
               }
             }
             else{

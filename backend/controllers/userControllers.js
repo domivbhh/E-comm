@@ -8,7 +8,7 @@ const signUp = async (req, res) => {
   const { email, firstname, lastname, password, image, confirmpassword }=req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
+    // console.log(hashedPassword);
     const result = await User({
       email,
       firstname,

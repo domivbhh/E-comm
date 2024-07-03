@@ -32,13 +32,16 @@ const navigate=useNavigate()
       const {  email,password  } = data;
       if (email.trim()!=='' || password.trim()!=='') 
         {
-        const result = await fetch("http://localhost:4000/auth/signin", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        const result = await fetch(
+          "https://e-comm-backend-l9pn.onrender.com/auth/signin",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         const resp = await result.json();
 
@@ -47,8 +50,8 @@ const navigate=useNavigate()
         if(resp.status==='success'){
           localStorage.setItem('user',JSON.stringify(resp.data[0]))
           dispatch(loginUser(resp.data[0]))
-        toast.success(`Welcome ${resp.data[0].firstname}`);   
-        navigate('/')      
+          toast.success(`Welcome ${resp.data[0].firstname}`);   
+          navigate('/')      
         }
         else{
           toast('Invalid credentials')

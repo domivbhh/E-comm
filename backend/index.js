@@ -13,14 +13,20 @@ app.use(cors())
 app.use(express.json({limit:'10mb'}))
 
 mongoose.set('strictQuery',false)
-mongoose.connect(process.env.MONGO_URI).then(()=>{ 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running at ${process.env.PORT} and db connected success`);
-});
-})
-.catch((e)=>{
-    console.log(e)
-})
+mongoose
+  .connect(
+    "mongodb+srv://hariharanvbit123:vb.2024@cluster0.sk7t1l7.mongodb.net/ecomm?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => {
+    app.listen(4000, () => {
+      console.log(
+        `Server is running at 4000 and db connected success`
+      );
+    });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 
 app.use('/product',productRouter)

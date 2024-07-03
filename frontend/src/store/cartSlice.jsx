@@ -34,7 +34,6 @@ const cartSlice=createSlice({
               (ele) => ele._id === action.payload._id
             );
 
-            console.log(index)
             let price = state.cart[index].price;
             state.total -= price;
             if(state.cart[index].qty===1){
@@ -50,7 +49,6 @@ const cartSlice=createSlice({
 
         //removing entire cart item
          removeCart:(state,action)=>{
-                    console.log(action.payload)
                 state.totalQty -= state.cart[action.payload].qty;
                 state.total-=state.cart[action.payload].qty*state.cart[action.payload].price
                 state.cart.splice(action.payload,1)
