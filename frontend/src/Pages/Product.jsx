@@ -36,7 +36,7 @@ const Product = () => {
           </div>
           <img
             src="https://www.jimphicdesigns.com/downloads/imgs-mockup/green-arrow-outline-pointing-down-animation.gif"
-            className="w-20 h-20 rounded-full -mt-[10%] ml-[92%]"/>
+            className="md:w-20 md:h-20 md:rounded-full md:-mt-[10%] md:ml-[92%] hidden"/>
         </div>
 
         <div className="my-24">
